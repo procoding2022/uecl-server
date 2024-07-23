@@ -322,28 +322,27 @@ export const formSubmit = async (request, response) => {
 
       export const getPostById = async (req, res) => {
         try {
-          pool.getConnection((err, connection) => {
-            if (err) {
-              console.error('Error getting connection:', err);
-              return res.status(500).json({ msg: 'Error during connection' });
-            }
-            const {id} = req.params;
-      
-            const query = 'SELECT * FROM Posts WHERE title = ?';
-            connection.query(query, [id], (error, results) => {
-              connection.release();
-      
-              if (error) {
-                console.error('Query error:', error);
-                return res.status(500).json({ msg: 'Error during query' });
-              }
-      
-              return res.status(200).json(results);
+            pool.getConnection((err, connection) => {
+                if (err) {
+                    console.error('Error getting connection:', err);
+                    return res.status(500).json({ msg: 'Error during connection' });
+                }
+                const { id } = req.params;
+    
+                const query = 'SELECT * FROM Posts WHERE id = ?';
+                connection.query(query, [id], (error, results) => {
+                    connection.release();
+    
+                    if (error) {
+                        console.error('Query error:', error);
+                        return res.status(500).json({ msg: 'Error during query' });
+                    }
+    
+                    return res.status(200).json(results);
+                });
             });
-          });
         } catch (error) {
-          console.error('Error:', error);
-          return res.status(500).json({ msg: 'Error', error: error.message });
+            console.error('Error:', error);
+            return res.status(500).json({ msg: 'Error', error: error.message });
         }
-      };
-
+    };

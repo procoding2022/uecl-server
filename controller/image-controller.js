@@ -1,5 +1,4 @@
-import pool from '../database/pool.js'; // Make sure to use the correct import
-import dotenv from 'dotenv';
+import { pool } from './dbConfig'; // Ensure you have the correct path to your dbConfig file
 
 export const uploadImage = async (req, res) => {
     try {

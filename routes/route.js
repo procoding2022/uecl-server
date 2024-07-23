@@ -2,6 +2,8 @@ import express from 'express';
 import { loginUser , newsletterEE , formSubmit , userSignup , newsletterFetch ,userfetch,updateUser,deleteUser,contactUsFetch,postFetch,getPostById} from '../controller/user-controller.js';
 import upload from '../utils/upload.js';
 import { uploadImage } from '../controller/image-controller.js';
+import { updatePost } from '../controller/updatePost.js';
+import { deletePost } from '../controller/deletepost.js';
 
 const router = express.Router();
 
@@ -18,4 +20,6 @@ router.get('/user/ContactUsfetch',contactUsFetch);
 router.post('/user/file/upload', upload.single('file'), uploadImage);
 router.get('/user/postfetch',postFetch);
 router.get('/user/post/:id', getPostById);
+router.put('/user/update/:id', upload.single('pdf_file_path'), updatePost);
+router.delete('/user/delete/:id', deletePost);
 export default router;
